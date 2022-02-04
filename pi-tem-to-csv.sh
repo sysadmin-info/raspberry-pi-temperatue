@@ -10,5 +10,5 @@ while true; do
         echo "$(date) @ $(hostname)" >> /$homedir/$OutputFile
         echo "GPU => $(/usr/bin/vcgencmd measure_temp)" | sed 's/temp=//' >> /$homedir/$OutputFile
         echo "CPU => $((cpu/1000))'C" >> /$homedir/$OutputFile
-        sleep 2;
+        sleep 300;
 done
