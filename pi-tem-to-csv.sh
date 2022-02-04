@@ -5,10 +5,11 @@
 # -------------------------------------------------------
 homedir="$(getent passwd $( /usr/bin/id -u ) | cut -d: -f6)"
 OutputFile="TemperatureReport-$(date +%d-%m-%Y).csv"
+concatenate="${homedir}/${OutputFile}"
 cpu=$(</sys/class/thermal/thermal_zone0/temp)
 while true; do
-        echo "$(date) @ $(hostname)" >> /$homedir/$OutputFile
-        echo "GPU => $(/usr/bin/vcgencmd measure_temp)" | sed 's/temp=//' >> /$homedir/$OutputFile
-        echo "CPU => $((cpu/1000))'C" >> /$homedir/$OutputFile
+        echo "$(date) @ $(hostname)" >> $concatenate
+        echo "GPU => $(/usr/bin/vcgencmd measure_temp)" | sed 's/temp=//' >> $concatenate
+        echo "CPU => $((cpu/1000))'C" >> $concatenate
         sleep 300;
 done
